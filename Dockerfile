@@ -1,32 +1,25 @@
 FROM php:8.3-cli
 
-# 1. Install sistem dependensi (ditambahkan libjpeg & libfreetype untuk extension GD)
+# 1. Install dependensi sistem dasar yang dibutuhkan CLI/Composer
 RUN apt-get update && apt-get install -y \
-    libpng-dev \
-    libjpeg62-turbo-dev \
-    libfreetype6-dev \
-    libonig-dev \
-    libxml2-dev \
-    libzip-dev \
-    libpq-dev \
     zip \
     unzip \
     git \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
-# 2. Konfigurasi dan install extension PHP secara paralel
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) \
-        pdo \
-        pdo_mysql \
-        pdo_pgsql \
-        mbstring \
-        exif \
-        pcntl \
-        bcmath \
-        gd \
-        zip
+# 2. Copy installer dan install ekstensifikasi PHP pre-compiled (Mencegah kompilasi dari source yang menghabiskan RAM)
+COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
+RUN install-php-extensions \
+    pdo \
+    pdo_mysql \
+    pdo_pgsql \
+    mbstring \
+    exif \
+    pcntl \
+    bcmath \
+    gd \
+    zip
 
 # 3. Copy Composer dari image resmi
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
