@@ -1,0 +1,12 @@
+/* ========================================================
+   WASTING MONEY - GLOBAL BASE STYLES (base.css)
+   ======================================================== */
+
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  background-color: #ffffff;
+  color: #0f172a;
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+  padding: 0;
+}

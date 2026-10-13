@@ -1,0 +1,81 @@
+================================================================================
+          DAFTAR AKUN PENGUJIAN SISTEM (TEST ACCOUNTS) - WASTING MONEY
+================================================================================
+Proyek     : Wasting Money - Form Approval & Public Catalog System
+Teknologi  : Laravel 10 (PHP 8.2) + Blade + Firebase (Auth & DB) + SQLite
+Dokumentasi: http://localhost:8000
+Kredensial : Username atau Email dapat digunakan untuk login.
+================================================================================
+
+--------------------------------------------------------------------------------
+⭐ REKOMENDASI KREDENSIAL CEPAT (EASY & FAST LOGIN)
+--------------------------------------------------------------------------------
+1. AKUN ADMIN (Akses Penuh: Dashboard Admin & Approval)
+   - Username / Email : admin   (atau: admin@rakapteman.id / sysadmin@wastingmoney.id)
+   - Password         : admin123
+   - Target Halaman   : Otomatis masuk ke Admin Dashboard (/admin)
+
+2. AKUN USER (Akses Home Page & Form Request Merch)
+   - Username / Email : user    (atau: user@rakapteman.id)
+   - Password         : user123
+   - Target Halaman   : Otomatis masuk ke Home Page User (Form Request)
+
+3. AKUN USER FIGMA (Sesuai Profil Desain Mockup: uccloud26)
+   - Username / Email : uccloud26  (atau: uccloud26@gmail.com)
+   - Password         : user123
+   - Target Halaman   : Otomatis masuk ke Home Page User & Profile (/profile)
+
+================================================================================
+DAFTAR LENGKAP DETAIL AKUN (FULL CREDENTIALS & ROLES)
+================================================================================
+
+1. AKUN ADMINISTRATOR
+   -----------------------------------------------------------------------------
+   Role          : admin
+   Nama Pengguna : System Administrator - Wasting Money
+   Username      : admin
+   Email         : admin@rakapteman.id
+   Email Alt     : sysadmin@wastingmoney.id
+   Password      : admin123
+   Firebase UID  : fb_admin_sys_001
+   Hak Akses     :
+     - Melihat semua daftar pengajuan formulir (/api/admin/submissions)
+     - Meninjau detail dan memperbarui status (/api/admin/submissions/{id}/status)
+     - Menyetujui pengajuan formulir (/api/admin/submissions/{id}/approve)
+     - Menolak pengajuan formulir (/api/admin/submissions/{id}/reject)
+     - Halaman Web Admin: http://localhost:8000/admin
+
+2. AKUN PENGGUNA KOMUNITAS
+   -----------------------------------------------------------------------------
+   Role          : user
+   Nama Pengguna : Dimas Wicaksono
+   Username      : user
+   Email         : user@rakapteman.id
+   Password      : user123
+   Firebase UID  : fb_user_dimas_001
+   Hak Akses     :
+     - Mengirimkan formulir pengajuan request merch (/)
+     - Melihat katalog rilisan barang terverifikasi (/catalog)
+     - Melihat riwayat pengajuan milik sendiri (/profile)
+
+3. AKUN PENGGUNA FIGMA (UCCLOUD26)
+   -----------------------------------------------------------------------------
+   Role          : user
+   Nama Pengguna : uccloud26
+   Username      : uccloud26
+   Email         : uccloud26@gmail.com
+   Password      : user123
+   Firebase UID  : fb_user_uccloud_002
+   Hak Akses     :
+     - Request merchandise sesuai desain Figma
+     - Riwayat request merchandise
+
+================================================================================
+URL NAVIGASI APLIKASI WEB:
+- Request Merch Form (Home) : http://localhost:8000/
+- Sign In / Sign Up         : http://localhost:8000/auth
+- Admin Review Dashboard    : http://localhost:8000/admin
+- Katalog Terverifikasi     : http://localhost:8000/catalog
+- Profil & Riwayat User     : http://localhost:8000/profile
+- REST API Spec & Docs      : http://localhost:8000/api-spec
+================================================================================

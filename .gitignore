@@ -1,0 +1,37 @@
+/.phpunit.cache
+/node_modules
+/public/build
+/public/hot
+/public/storage
+/storage/*.key
+/vendor
+.env
+.env.backup
+.env.production
+Homestead.json
+Homestead.yaml
+auth.json
+npm-debug.log
+yarn-error.log
+/.fleet
+/.idea
+/.vscode
+
+# Firebase & Secret Keys
+serviceAccountKey.json
+*serviceAccountKey*.json
+
+# Storage, Cache & Logs
+/bootstrap/cache/*
+/storage/app/*
+/storage/app/public/*
+/storage/framework/cache/*
+/storage/framework/cache/data/*
+/storage/framework/sessions/*
+/storage/framework/testing/*
+/storage/framework/views/*
+/storage/logs/*
+
+# OS Files
+.DS_Store
+Thumbs.db
