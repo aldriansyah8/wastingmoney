@@ -1,8 +1,16 @@
 FROM php:8.3-cli
 
-# Install dependencies sistem
+# Install dependencies sistem (termasuk libpq-dev untuk PostgreSQL)
 RUN apt-get update && apt-get install -y \
-    libpng-dev libonig-dev libxml2-dev libzip-dev zip unzip git curl
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    libzip-dev \
+    libpq-dev \
+    zip \
+    unzip \
+    git \
+    curl
 
 # Install extension PHP yang dibutuhkan Laravel
 RUN docker-php-ext-install pdo pdo_mysql pdo_pgsql mbstring exif pcntl bcmath gd zip
