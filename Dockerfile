@@ -1,8 +1,10 @@
 FROM php:8.3-cli
 
-# Install dependencies sistem (termasuk libpq-dev untuk PostgreSQL)
+# 1. Install sistem dependensi (ditambahkan libjpeg & libfreetype untuk extension GD)
 RUN apt-get update && apt-get install -y \
     libpng-dev \
+    libjpeg62-turbo-dev \
+    libfreetype6-dev \
     libonig-dev \
     libxml2-dev \
     libzip-dev \
@@ -10,32 +12,42 @@ RUN apt-get update && apt-get install -y \
     zip \
     unzip \
     git \
-    curl
+    curl \
+    && rm -rf /var/lib/apt/lists/*
 
-# Install extension PHP yang dibutuhkan Laravel
-RUN docker-php-ext-install pdo pdo_mysql pdo_pgsql mbstring exif pcntl bcmath gd zip
+# 2. Konfigurasi dan install extension PHP secara paralel
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install -j$(nproc) \
+        pdo \
+        pdo_mysql \
+        pdo_pgsql \
+        mbstring \
+        exif \
+        pcntl \
+        bcmath \
+        gd \
+        zip
 
-# Copy Composer dari official image
+# 3. Copy Composer dari image resmi
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www
 
+# Copy seluruh source code
 COPY . .
 
-# Buat direktori storage & bootstrap/cache serta atur izin tulis sebelum composer install
+# 4. Buat folder storage, atur izin akses dan kepemilikan
 RUN mkdir -p storage/framework/cache/data \
     storage/framework/sessions \
     storage/framework/views \
     bootstrap/cache \
-    && chmod -R 777 storage bootstrap/cache
+    && chown -R www-data:www-data /var/www \
+    && chmod -R 775 storage bootstrap/cache
 
-# Install dependency PHP tanpa dev-tools
+# 5. Install dependency Composer tanpa dev-tools
 RUN composer install --no-dev --optimize-autoloader
-
-# Set hak akses kepemilikan ke www-data
-RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 
 EXPOSE 8000
 
-# Jalankan migrasi, optimasi cache, dan jalankan server
-CMD php artisan migrate --force && php artisan config:cache && php artisan route:cache && php artisan serve --host=0.0.0.0 --port=8000
+# 6. Command utama untuk menjalankan aplikasi
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
