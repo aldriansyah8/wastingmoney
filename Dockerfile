@@ -22,10 +22,17 @@ WORKDIR /var/www
 
 COPY . .
 
+# Buat direktori storage & bootstrap/cache serta atur izin tulis sebelum composer install
+RUN mkdir -p storage/framework/cache/data \
+    storage/framework/sessions \
+    storage/framework/views \
+    bootstrap/cache \
+    && chmod -R 777 storage bootstrap/cache
+
 # Install dependency PHP tanpa dev-tools
 RUN composer install --no-dev --optimize-autoloader
 
-# Set hak akses folder storage & cache
+# Set hak akses kepemilikan ke www-data
 RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 
 EXPOSE 8000
