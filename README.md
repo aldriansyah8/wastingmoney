@@ -9,15 +9,15 @@ Desain antarmuka (UI/UX) dan tata letak dibangun 100% presisi mengikuti dokumen 
 ## 🚀 Fitur & Modul Utama
 
 1. **User Home & Submission Flow (`/`)**:
-   - Mengikuti desain client `Home Page user.png` dengan banner artistik band, formulir 2 kolom, input field custom, upload file merch, tombol *Upload* abu gelap (`#2b2b2b`), dan tombol *Submit* indigo (`#4e46e5`).
+   - Mengikuti desain `Home Page user.png` dengan banner artistik band, formulir 2 kolom, input field custom, upload file merch, tombol *Upload* abu gelap (`#2b2b2b`), dan tombol *Submit* indigo (`#4e46e5`).
    - Setiap pengajuan mendapatkan Request ID berurutan 7 digit (contoh: `#0000001`).
 
 2. **Autentikasi Pengguna & Admin (`/auth`)**:
-   - Mengikuti desain client `Sign in.png` & `Sign up.png` dengan maskot 3D karakter, input ungu lembut (`#f0f1fe`), tombol switch tab Login/Register, dan toggle visibilitas password.
+   - Mengikuti desain `Sign in.png` & `Sign up.png` dengan maskot 3D karakter, input ungu lembut (`#f0f1fe`), tombol switch tab Login/Register, dan toggle visibilitas password.
    - Terintegrasi dengan token Sanctum dan sinkronisasi ke Firebase Auth.
 
 3. **Admin Dashboard & Review Modal (`/admin`)**:
-   - Mengikuti desain client `admin_page1.png` & `admin_page2.png` (serta mockup 2-kolom client).
+   - Mengikuti desain `admin_page1.png` & `admin_page2.png` (serta mockup 2-kolom client).
    - Menampilkan tabel seluruh pengajuan dengan tombol info `(i)` per baris.
    - **Review Modal 2-Kolom Presisi**:
      - **Kolom Kiri**: Galeri foto produk merch (preview foto utama + deretan 3 thumbnail yang dapat diklik bergantian + box indikator *"Max 3 Photo"*).
