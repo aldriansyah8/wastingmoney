@@ -1,0 +1,893 @@
+/* ==========================================================================
+   WASTING MONEY - USER REQUEST LIST / CATALOG STYLES
+   Design System matching exact client mockups (Image 1, 2, 3, 4)
+   Strictly external CSS (Zero inline <style> tags)
+   ========================================================================== */
+
+/* Page Container */
+.user-list-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  color: #0f172a;
+}
+
+/* Header (Matching Image 2) */
+.user-list-header {
+  width: 100%;
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.7);
+}
+
+.user-list-logo-img {
+  height: 28px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* Search Bar & Controls in Center (Image 2) */
+.user-list-search-section {
+  flex: 1;
+  max-width: 620px;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.user-list-search-wrapper {
+  position: relative;
+  flex: 1;
+}
+
+.user-list-search-input {
+  width: 100%;
+  padding: 0.5rem 1.25rem;
+  border-radius: 9999px;
+  border: 1.5px solid #cbd5e1;
+  font-size: 0.8125rem;
+  color: #0f172a;
+  background-color: #ffffff;
+  text-align: center;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.user-list-search-input:focus {
+  border-color: #4e46e5;
+  box-shadow: 0 0 0 3px rgba(78, 70, 229, 0.12);
+  text-align: left;
+  padding-left: 1.5rem;
+}
+
+.user-list-header-btn {
+  padding: 0.45rem;
+  border-radius: 8px;
+  color: #334155;
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+  position: relative;
+}
+
+.user-list-header-btn:hover {
+  color: #4e46e5;
+  background: #f1f5f9;
+  border-color: #e2e8f0;
+}
+
+.user-list-header-btn.active {
+  color: #4e46e5;
+  background: #eef2ff;
+  border-color: #c7d2fe;
+}
+
+/* Red / Purple active dot indicator on the filter button */
+.user-filter-active-dot {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+  background-color: #4e46e5;
+  box-shadow: 0 0 0 1.5px #ffffff;
+}
+
+/* ==========================================================================
+   HEADER FILTER POPOVER DROPDOWN (Opened by Filter Icon in Header)
+   ========================================================================== */
+.user-filter-wrapper {
+  position: relative;
+  display: inline-flex;
+}
+
+.user-filter-popover {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 330px;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.12), 0 10px 15px -5px rgba(0, 0, 0, 0.06);
+  padding: 1.25rem;
+  z-index: 60;
+  animation: filterPopoverFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes filterPopoverFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Triangle caret pointing to filter icon */
+.user-filter-popover::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 12px;
+  height: 12px;
+  background: #ffffff;
+  border-left: 1px solid #e2e8f0;
+  border-top: 1px solid #e2e8f0;
+}
+
+.user-filter-popover-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 0.75rem;
+  margin-bottom: 0.85rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.user-filter-popover-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #0f172a;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.user-filter-reset-btn {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #4e46e5;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  transition: all 0.15s ease;
+}
+
+.user-filter-reset-btn:hover {
+  background-color: #eef2ff;
+  text-decoration: underline;
+}
+
+.user-filter-section {
+  margin-bottom: 1rem;
+}
+
+.user-filter-section:last-child {
+  margin-bottom: 0;
+}
+
+.user-filter-section-label {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+/* Status Chips inside Popover */
+.user-filter-chips-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.user-filter-chip {
+  padding: 0.35rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border: 1px solid #e2e8f0;
+  background-color: #f8fafc;
+  color: #334155;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.15s ease;
+}
+
+.user-filter-chip:hover {
+  background-color: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+.user-filter-chip.active {
+  background-color: #0f172a;
+  color: #ffffff;
+  border-color: #0f172a;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.2);
+}
+
+.user-filter-chip.active .user-card-status-dot {
+  box-shadow: 0 0 0 1.5px #ffffff;
+}
+
+/* Merch Type Chips */
+.user-filter-chip-type {
+  padding: 0.3rem 0.65rem;
+  border-radius: 8px;
+  font-size: 0.7125rem;
+  font-weight: 600;
+  border: 1px solid #e2e8f0;
+  background-color: #f8fafc;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.user-filter-chip-type:hover {
+  background-color: #f1f5f9;
+}
+
+.user-filter-chip-type.active {
+  background-color: #4e46e5;
+  color: #ffffff;
+  border-color: #4e46e5;
+  box-shadow: 0 2px 6px rgba(78, 70, 229, 0.25);
+}
+
+/* Popover Footer summary */
+.user-filter-popover-footer {
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.user-filter-summary-text {
+  font-size: 0.725rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.user-filter-close-btn {
+  padding: 0.35rem 0.85rem;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  background-color: #4e46e5;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.user-filter-close-btn:hover {
+  background-color: #4338ca;
+}
+
+/* Right Navigation Icons */
+.user-list-right-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: #0f172a;
+  position: relative;
+}
+
+.user-list-nav-link {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #64748b;
+  text-decoration: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  transition: all 0.15s ease;
+}
+
+.user-list-nav-link:hover {
+  color: #4e46e5;
+  background: #f8fafc;
+}
+
+/* Filter Tag Pills (Quick status selector) */
+.user-list-filter-bar {
+  width: 100%;
+  max-width: 1380px;
+  margin: 0.75rem auto 0;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.user-list-filter-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.user-list-filter-pill {
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  color: #475569;
+  cursor: pointer;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.15s ease;
+}
+
+.user-list-filter-pill:hover {
+  border-color: #cbd5e1;
+  background: #f1f5f9;
+}
+
+.user-list-filter-pill.active {
+  background: #0f172a;
+  border-color: #0f172a;
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   CARDS GRID (Matching Image 2 & Image 3)
+   ========================================================================== */
+.user-list-main {
+  flex: 1;
+  width: 100%;
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 1.5rem 1.5rem 3rem;
+}
+
+.user-list-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .user-list-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+}
+
+@media (min-width: 880px) {
+  .user-list-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+@media (min-width: 1160px) {
+  .user-list-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+/* Card Base Container (Image 3) */
+.user-card-item {
+  border-radius: 26px;
+  padding: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.user-card-item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.15);
+}
+
+.user-card-item:active {
+  transform: translateY(-2px);
+}
+
+/* 5 Template Color Themes (Image 3 exact HEX) */
+/* 1. Green Theme (Found!) */
+.user-card-item.theme-green {
+  background-color: #bbf8b6;
+  border: 2px solid #84e87d;
+}
+.user-card-item.theme-green:hover {
+  border-color: #5ec756;
+}
+
+/* 2. Yellow Theme (Process) */
+.user-card-item.theme-yellow {
+  background-color: #f6f7ae;
+  border: 2px solid #e1e37f;
+}
+.user-card-item.theme-yellow:hover {
+  border-color: #c9cc58;
+}
+
+/* 3. Gray Theme (Queue) */
+.user-card-item.theme-gray {
+  background-color: #cecece;
+  border: 2px solid #b5b5b5;
+}
+.user-card-item.theme-gray:hover {
+  border-color: #949494;
+}
+
+/* 4. Pink / Red Theme (Cancel) */
+.user-card-item.theme-pink {
+  background-color: #f7aeae;
+  border: 2px solid #e78d8d;
+}
+.user-card-item.theme-pink:hover {
+  border-color: #d16969;
+}
+
+/* 5. Blue Theme (Paid) */
+.user-card-item.theme-blue {
+  background-color: #aed7f7;
+  border: 2px solid #85c2ee;
+}
+.user-card-item.theme-blue:hover {
+  border-color: #59a6df;
+}
+
+/* Inner White Product Image Container (Image 3) */
+.user-card-img-wrap {
+  background-color: #ffffff;
+  border-radius: 18px;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.user-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.25s ease;
+}
+
+.user-card-item:hover .user-card-img {
+  transform: scale(1.04);
+}
+
+/* Card Content / Details at Bottom (Image 3) */
+.user-card-info {
+  margin-top: 0.85rem;
+  padding: 0 0.25rem 0.25rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-card-year {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.2;
+}
+
+.user-card-title {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-top: 2px;
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Status indicator badge on card */
+.user-card-status-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.35rem;
+}
+
+.user-card-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: rgba(15, 23, 42, 0.75);
+}
+
+.user-card-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.user-card-status-dot.dot-green { background-color: #15803d; }
+.user-card-status-dot.dot-yellow { background-color: #a16207; }
+.user-card-status-dot.dot-gray { background-color: #4b5563; }
+.user-card-status-dot.dot-pink { background-color: #b91c1c; }
+.user-card-status-dot.dot-blue { background-color: #1d4ed8; }
+
+/* ==========================================================================
+   DETAIL MODAL WITH DYNAMIC COLOR TEMPLATES (Matching Image 1 & Image 4)
+   ========================================================================== */
+.user-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.user-modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Modal Window Container */
+.user-modal-card {
+  width: 100%;
+  max-width: 780px;
+  border-radius: 32px;
+  padding: 1.75rem;
+  position: relative;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  transform: scale(0.95);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease;
+  max-height: 92vh;
+  overflow-y: auto;
+}
+
+.user-modal-overlay.active .user-modal-card {
+  transform: scale(1);
+}
+
+/* Dynamic Template Backgrounds on Modal (Image 1 & 4) */
+.user-modal-card.theme-green {
+  background-color: #bbf8b6;
+  border: 3px solid #84e87d;
+}
+
+.user-modal-card.theme-yellow {
+  background-color: #f6f7ae;
+  border: 3px solid #e1e37f;
+}
+
+.user-modal-card.theme-gray {
+  background-color: #cecece;
+  border: 3px solid #b5b5b5;
+}
+
+.user-modal-card.theme-pink {
+  background-color: #f7aeae;
+  border: 3px solid #e78d8d;
+}
+
+.user-modal-card.theme-blue {
+  background-color: #aed7f7;
+  border: 3px solid #85c2ee;
+}
+
+/* Close Button (X in top right) */
+.user-modal-close-btn {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(15, 23, 42, 0.08);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0f172a;
+  transition: all 0.15s ease;
+  z-index: 10;
+}
+
+.user-modal-close-btn:hover {
+  background: rgba(15, 23, 42, 0.18);
+  transform: rotate(90deg);
+}
+
+/* Modal Two-Column Layout (Matching Image 1 & 4) */
+.user-modal-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 680px) {
+  .user-modal-layout {
+    grid-template-columns: 320px 1fr;
+    gap: 2rem;
+  }
+}
+
+/* Left Column: Product Gallery */
+.user-modal-gallery {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-modal-main-img-wrap {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background-color: #ffffff;
+  border-radius: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.user-modal-main-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Thumbnails Row below main image */
+.user-modal-thumbs-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0.85rem;
+}
+
+.user-modal-thumb-box {
+  width: 46px;
+  height: 46px;
+  border-radius: 10px;
+  background: #ffffff;
+  border: 1.5px solid rgba(15, 23, 42, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.15s ease;
+}
+
+.user-modal-thumb-box:hover,
+.user-modal-thumb-box.selected {
+  border-color: #0f172a;
+  transform: scale(1.06);
+}
+
+.user-modal-thumb-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Right Column: Information & Actions */
+.user-modal-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.user-modal-header-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.user-modal-req-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.1;
+}
+
+.user-modal-req-id {
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+  margin-top: 1px;
+}
+
+/* Status Dot & Timestamp Badge (Top Right) */
+.user-modal-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-right: 1.5rem;
+}
+
+.user-modal-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+.user-modal-status-dot.dot-green { background-color: #16a34a; }
+.user-modal-status-dot.dot-yellow { background-color: #ca8a04; }
+.user-modal-status-dot.dot-gray { background-color: #4b5563; }
+.user-modal-status-dot.dot-pink { background-color: #dc2626; }
+.user-modal-status-dot.dot-blue { background-color: #2563eb; }
+
+/* Field Details List */
+.user-modal-field-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.45rem;
+}
+
+.user-modal-field-label {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 1px;
+  line-height: 1.2;
+}
+
+.user-modal-field-value {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #1e293b;
+  line-height: 1.35;
+}
+
+.user-modal-field-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 0.45rem;
+}
+
+/* Action Buttons (Image 1 & Image 4) */
+.user-modal-actions-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+/* Pembayaran Button Variants */
+.user-btn-pay-active {
+  background-color: #4d47c3;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.8125rem;
+  padding: 0.65rem 2.2rem;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 0 4px 12px rgba(77, 71, 195, 0.25);
+}
+
+.user-btn-pay-active:hover {
+  background-color: #3f39a8;
+  transform: translateY(-1px);
+}
+
+.user-btn-pay-disabled {
+  background-color: #7b7b7b;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.8125rem;
+  padding: 0.65rem 2.2rem;
+  border-radius: 12px;
+  border: none;
+  cursor: not-allowed;
+  opacity: 0.9;
+}
+
+/* Cancel Button */
+.user-btn-cancel {
+  background-color: #c34747;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.8125rem;
+  padding: 0.65rem 2.2rem;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 0 4px 12px rgba(195, 71, 71, 0.2);
+}
+
+.user-btn-cancel:hover {
+  background-color: #b03a3a;
+  transform: translateY(-1px);
+}
+
+/* Status Notice Pill for Paid or Cancelled */
+.user-status-notice {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.user-status-notice.paid {
+  background-color: rgba(37, 99, 235, 0.15);
+  color: #1e40af;
+}
+
+.user-status-notice.canceled {
+  background-color: rgba(220, 38, 38, 0.15);
+  color: #991b1b;
+}
+
+/* Footer (Matching admin & home) */
+.user-list-footer {
+  width: 100%;
+  background-color: #4b4b4b;
+  color: #d1d5db;
+  text-align: center;
+  padding: 1.15rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  margin-top: auto;
+}
