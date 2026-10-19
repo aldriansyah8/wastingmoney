@@ -1,0 +1,477 @@
+/* ========================================================
+   WASTING MONEY - GLOBAL BASE STYLES (base.css)
+   ======================================================== */
+
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  background-color: #ffffff;
+  color: #0f172a;
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+  padding: 0;
+}
+
+/* ========================================================
+   WASTING MONEY - GLOBAL CUSTOM DROPDOWN DESIGN SYSTEM
+   ======================================================== */
+
+.wm-dropdown-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* Trigger Button */
+.wm-dropdown-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  background-color: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 0.45rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #1e293b;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+  user-select: none;
+  text-align: left;
+}
+
+.wm-dropdown-trigger:hover {
+  border-color: #94a3b8;
+  background-color: #f8fafc;
+}
+
+.wm-dropdown-trigger:focus,
+.wm-dropdown-trigger.open {
+  border-color: #4e46e5;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(78, 70, 229, 0.14);
+}
+
+.wm-dropdown-trigger-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+}
+
+.wm-dropdown-chevron {
+  width: 0.95rem;
+  height: 0.95rem;
+  color: #64748b;
+  flex-shrink: 0;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), color 0.15s ease;
+}
+
+.wm-dropdown-trigger.open .wm-dropdown-chevron {
+  transform: rotate(180deg);
+  color: #4e46e5;
+}
+
+/* Popover Menu */
+.wm-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px -3px rgba(15, 23, 42, 0.12), 0 4px 6px -2px rgba(15, 23, 42, 0.04);
+  padding: 5px;
+  z-index: 80;
+  display: none;
+  max-height: 240px;
+  overflow-y: auto;
+  animation: wmDropdownFadeIn 0.16s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.wm-dropdown-menu.show {
+  display: block;
+}
+
+@keyframes wmDropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Slim Scrollbar */
+.wm-dropdown-menu::-webkit-scrollbar {
+  width: 5px;
+}
+.wm-dropdown-menu::-webkit-scrollbar-track {
+  background: #f8fafc;
+  border-radius: 8px;
+}
+.wm-dropdown-menu::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 8px;
+}
+.wm-dropdown-menu::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Dropdown Option Item */
+.wm-dropdown-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.65rem;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #334155;
+  cursor: pointer;
+  transition: all 0.12s ease;
+  user-select: none;
+}
+
+.wm-dropdown-item:hover {
+  background-color: #f1f5f9;
+  color: #0f172a;
+}
+
+.wm-dropdown-item.selected {
+  background-color: #eef2ff;
+  color: #4338ca;
+  font-weight: 600;
+}
+
+.wm-dropdown-item-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.wm-dropdown-check {
+  width: 0.875rem;
+  height: 0.875rem;
+  color: #4e46e5;
+  opacity: 0;
+  transition: opacity 0.12s ease;
+}
+
+.wm-dropdown-item.selected .wm-dropdown-check {
+  opacity: 1;
+}
+
+/* Status Indicators */
+.wm-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+.wm-status-dot-in-progress,
+.wm-status-dot-process {
+  background-color: #eab308;
+  box-shadow: 0 0 0 2px rgba(234, 179, 8, 0.2);
+}
+.wm-status-dot-approved,
+.wm-status-dot-found {
+  background-color: #22c55e;
+  box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.2);
+}
+.wm-status-dot-rejected,
+.wm-status-dot-cancel {
+  background-color: #ef4444;
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);
+}
+.wm-status-dot-pending,
+.wm-status-dot-queue {
+  background-color: #64748b;
+  box-shadow: 0 0 0 2px rgba(100, 116, 139, 0.2);
+}
+.wm-status-dot-paid {
+  background-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+/* Currency Code Badge */
+.wm-currency-code-badge {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background-color: #f1f5f9;
+  color: #475569;
+}
+.wm-dropdown-item.selected .wm-currency-code-badge {
+  background-color: #e0e7ff;
+  color: #4338ca;
+}
+
+/* ========================================================
+   WASTING MONEY - GLOBAL MAKE SURE CONFIRMATION MODAL
+   Single Canonical Definition used across all pages
+   ======================================================== */
+.wm-confirm-overlay,
+.profile-confirm-overlay,
+.admin-confirm-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.wm-confirm-overlay.active,
+.profile-confirm-overlay.active,
+.admin-confirm-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.wm-confirm-card,
+.profile-confirm-card,
+.admin-confirm-card {
+  width: 100%;
+  max-width: 580px;
+  background-color: #ffffff;
+  border: 1.5px solid #0f172a;
+  border-radius: 20px;
+  padding: 3rem 2.25rem 2.25rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  transform: scale(0.95);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.wm-confirm-overlay.active .wm-confirm-card,
+.profile-confirm-overlay.active .profile-confirm-card,
+.admin-confirm-overlay.active .admin-confirm-card {
+  transform: scale(1);
+}
+
+.wm-confirm-title,
+.profile-confirm-title,
+.admin-confirm-title {
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.3;
+  margin-bottom: 2.25rem;
+}
+
+.wm-confirm-actions,
+.profile-confirm-actions,
+.admin-confirm-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.85rem;
+}
+
+.wm-btn-confirm-yes,
+.profile-btn-yes,
+.admin-btn-confirm-yes {
+  background-color: #4d47c3;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.875rem;
+  padding: 0.75rem 2.5rem;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 0 4px 12px rgba(77, 71, 195, 0.25);
+}
+
+.wm-btn-confirm-yes:hover,
+.profile-btn-yes:hover,
+.admin-btn-confirm-yes:hover {
+  background-color: #3f39a8;
+  transform: translateY(-1px);
+}
+
+.wm-btn-confirm-cancel,
+.profile-btn-modal-cancel,
+.admin-btn-confirm-cancel {
+  background-color: #c34747;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.875rem;
+  padding: 0.75rem 2.2rem;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 0 4px 12px rgba(195, 71, 71, 0.2);
+}
+
+.wm-btn-confirm-cancel:hover,
+.profile-btn-modal-cancel:hover,
+.admin-btn-confirm-cancel:hover {
+  background-color: #b03a3a;
+  transform: translateY(-1px);
+}
+
+/* ================= CUSTOM DESIGNED ALERT MODAL ================= */
+.wm-custom-alert-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.wm-custom-alert-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.wm-custom-alert-card {
+  width: 100%;
+  max-width: 480px;
+  background-color: #ffffff;
+  border: 1.5px solid #0f172a;
+  border-radius: 24px;
+  padding: 2.25rem 2rem 2rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+  transform: scale(0.92) translateY(8px);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.wm-custom-alert-overlay.active .wm-custom-alert-card {
+  transform: scale(1) translateY(0);
+}
+
+.wm-alert-icon-wrapper {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+  background-color: #f5f3ff;
+  border: 1px solid #ddd6fe;
+  color: #4d47c3;
+}
+
+.wm-alert-icon-wrapper.warning {
+  background-color: #fffbeb;
+  border-color: #fde68a;
+  color: #d97706;
+}
+
+.wm-alert-icon-wrapper.danger {
+  background-color: #fef2f2;
+  border-color: #fecaca;
+  color: #dc2626;
+}
+
+.wm-alert-icon-wrapper.info {
+  background-color: #eff6ff;
+  border-color: #bfdbfe;
+  color: #2563eb;
+}
+
+.wm-alert-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.3;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.01em;
+}
+
+.wm-alert-message {
+  font-size: 0.925rem;
+  color: #475569;
+  line-height: 1.6;
+  margin-bottom: 1.35rem;
+}
+
+.wm-alert-draft-notice {
+  margin-bottom: 1.5rem;
+  padding: 0.85rem 1rem;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  font-size: 0.825rem;
+  color: #334155;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  line-height: 1.45;
+}
+
+.wm-alert-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+.wm-btn-alert-primary {
+  background-color: #4d47c3;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.875rem;
+  padding: 0.75rem 1.65rem;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 0 4px 12px rgba(77, 71, 195, 0.25);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.wm-btn-alert-primary:hover {
+  background-color: #3f39a8;
+  transform: translateY(-1px);
+}
+
+.wm-btn-alert-secondary {
+  background-color: #ffffff;
+  color: #475569;
+  font-weight: 600;
+  font-size: 0.875rem;
+  padding: 0.75rem 1.35rem;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.wm-btn-alert-secondary:hover {
+  background-color: #f8fafc;
+  color: #0f172a;
+  border-color: #94a3b8;
+}
+
+

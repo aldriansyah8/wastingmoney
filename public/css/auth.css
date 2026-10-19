@@ -1,0 +1,277 @@
+/* ========================================================
+   WASTING MONEY - AUTHENTICATION PAGE STYLES (auth.css)
+   Dedicated CSS for Sign In & Sign Up Views
+   Harmonious Mix: Vanilla CSS + Tailwind compatibility
+   ======================================================== */
+
+:root {
+  --wm-auth-bg: #ffffff;
+  --wm-auth-text: #0f172a;
+  --wm-auth-input-bg: #f0f1fe;
+  --wm-auth-input-hover: #ebedfd;
+  --wm-auth-input-placeholder: #a5b4fc;
+  --wm-auth-primary: #4e46e5;
+  --wm-auth-primary-hover: #4338ca;
+}
+
+/* Page Layout */
+.auth-page-container {
+  min-height: 100vh;
+  background-color: var(--wm-auth-bg);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Header */
+.auth-header {
+  width: 100%;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+@media (min-width: 640px) {
+  .auth-header {
+    padding-left: 3rem;
+    padding-right: 3rem;
+    padding-top: 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .auth-header {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+}
+
+.auth-logo-img {
+  height: 1.5rem;
+  object-fit: contain;
+}
+
+@media (min-width: 640px) {
+  .auth-logo-img {
+    height: 1.75rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .auth-logo-img {
+    height: 2rem;
+  }
+}
+
+/* Main Container */
+.auth-main-container {
+  flex: 1;
+  width: 100%;
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 640px) {
+  .auth-main-container {
+    padding: 2.5rem 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .auth-main-container {
+    padding: 2.5rem 3rem;
+  }
+}
+
+/* 3D Character Illustration */
+.auth-character-img {
+  height: auto;
+  max-height: 220px;
+  width: auto;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+@media (min-width: 640px) {
+  .auth-character-img {
+    max-height: 340px;
+  }
+}
+
+@media (min-width: 768px) {
+  .auth-character-img {
+    max-height: 400px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .auth-character-img {
+    max-height: 480px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .auth-character-img {
+    max-height: 520px;
+  }
+}
+
+/* Form Card */
+.auth-form-card {
+  width: 100%;
+  max-width: 440px;
+  background-color: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: 24px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+@media (min-width: 640px) {
+  .auth-form-card {
+    max-width: 480px;
+    border-radius: 28px;
+    padding: 2.5rem;
+  }
+}
+
+/* Typography */
+.auth-card-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.025em;
+  line-height: 1.25;
+}
+
+@media (min-width: 640px) {
+  .auth-card-title {
+    font-size: 1.875rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .auth-card-title {
+    font-size: 2rem;
+  }
+}
+
+.auth-card-subtitle {
+  font-size: 1rem;
+  color: #334155;
+  font-weight: 400;
+  margin-top: 0.125rem;
+}
+
+@media (min-width: 640px) {
+  .auth-card-subtitle {
+    font-size: 1.125rem;
+  }
+}
+
+/* Input Fields (Matching Sign in.png) */
+.auth-input-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 0.5rem;
+}
+
+.auth-text-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background-color: var(--wm-auth-input-bg);
+  color: #1e293b;
+  border-radius: 0.75rem;
+  outline: none;
+  border: 1px solid transparent;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.15s ease;
+}
+
+@media (min-width: 640px) {
+  .auth-text-input {
+    padding: 0.875rem 1rem;
+  }
+}
+
+.auth-text-input::placeholder {
+  color: var(--wm-auth-input-placeholder);
+}
+
+.auth-text-input:hover {
+  background-color: var(--wm-auth-input-hover);
+}
+
+.auth-text-input:focus {
+  background-color: #ffffff;
+  border-color: var(--wm-auth-primary);
+  box-shadow: 0 0 0 3px rgba(78, 70, 229, 0.15);
+}
+
+.auth-password-toggle-btn {
+  position: absolute;
+  right: 0.875rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--wm-auth-input-placeholder);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem;
+  transition: color 0.15s ease;
+}
+
+.auth-password-toggle-btn:hover {
+  color: var(--wm-auth-primary);
+}
+
+/* Submit Button */
+.auth-submit-btn {
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.875rem 1rem;
+  background-color: var(--wm-auth-primary);
+  color: #ffffff;
+  font-weight: 600;
+  border-radius: 0.75rem;
+  font-size: 0.875rem;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.15s ease;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.auth-submit-btn:hover {
+  background-color: var(--wm-auth-primary-hover);
+}
+
+.auth-submit-btn:active {
+  transform: scale(0.99);
+}
+
+.auth-switch-link {
+  color: var(--wm-auth-primary);
+  font-weight: 600;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 0.25rem;
+}
+
+.auth-switch-link:hover {
+  text-decoration: underline;
+}

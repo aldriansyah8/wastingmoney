@@ -1,0 +1,163 @@
+/* ========================================================
+   WASTING MONEY - API SPECIFICATION STYLES
+   Harmonious Mix: Dedicated Vanilla CSS + Tailwind Utilities
+   ======================================================== */
+
+/* Root Variables for Consistent Vanilla Styling */
+:root {
+  --wm-bg: #ffffff;
+  --wm-card-bg: #ffffff;
+  --wm-border: #e2e8f0;
+  --wm-border-subtle: #f1f5f9;
+  --wm-text-main: #0f172a;
+  --wm-text-muted: #64748b;
+  --wm-text-dim: #94a3b8;
+  --wm-th-bg: #f8fafc;
+  --wm-hover-bg: #f8fafc;
+  --wm-font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --wm-font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+/* Page Layout */
+.api-page-wrapper {
+  min-height: 100vh;
+  background-color: var(--wm-bg);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 2.75rem 1.25rem;
+  font-family: var(--wm-font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+.api-content-container {
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+/* Card Design */
+.api-main-card {
+  background-color: var(--wm-card-bg);
+  border: 1px solid var(--wm-border);
+  border-radius: 18px;
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
+  padding: 2rem;
+  transition: box-shadow 0.2s ease;
+}
+
+.api-header-section {
+  margin-bottom: 1.5rem;
+}
+
+.api-heading {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--wm-text-main);
+  letter-spacing: -0.025em;
+  margin: 0;
+}
+
+/* Table Responsive Container */
+.api-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 12px;
+  border: 1px solid var(--wm-border-subtle);
+  background-color: var(--wm-card-bg);
+}
+
+/* Table Architecture */
+.api-spec-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.api-spec-table th {
+  padding: 0.85rem 1.25rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--wm-text-muted);
+  background-color: var(--wm-th-bg);
+  border-bottom: 1px solid var(--wm-border);
+}
+
+.api-spec-table td {
+  padding: 0.95rem 1.25rem;
+  font-size: 0.875rem;
+  border-bottom: 1px solid var(--wm-border-subtle);
+  vertical-align: middle;
+  transition: background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.api-spec-table tbody tr:hover td {
+  background-color: var(--wm-hover-bg);
+}
+
+.api-spec-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Column Widths */
+.col-method {
+  width: 120px;
+}
+
+.col-access {
+  width: 160px;
+}
+
+/* Monospace Code Badge */
+.api-endpoint-badge {
+  font-family: var(--wm-font-mono);
+  font-size: 0.835rem;
+  font-weight: 500;
+  color: var(--wm-text-main);
+  background-color: #f8fafc;
+  border: 1px solid var(--wm-border);
+  padding: 0.25rem 0.65rem;
+  border-radius: 6px;
+  display: inline-block;
+  letter-spacing: -0.01em;
+}
+
+/* Method Badges */
+.api-method-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 0.25rem 0.65rem;
+  border-radius: 6px;
+  text-transform: uppercase;
+}
+
+.api-method-badge.post {
+  background-color: #ecfdf5;
+  color: #059669;
+  border: 1px solid #a7f3d0;
+}
+
+.api-method-badge.get {
+  background-color: #eff6ff;
+  color: #2563eb;
+  border: 1px solid #bfdbfe;
+}
+
+.api-method-badge.patch {
+  background-color: #fffbeb;
+  color: #d97706;
+  border: 1px solid #fde68a;
+}
+
+.api-access-text {
+  color: var(--wm-text-muted);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
