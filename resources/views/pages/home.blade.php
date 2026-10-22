@@ -166,7 +166,7 @@
               type="text"
               id="merchEdition"
               name="merchEdition"
-              placeholder="Taylor Swift Nort America Tour"
+              placeholder="Taylor Swift North America Tour"
               class="home-text-input"
             />
           </div>
