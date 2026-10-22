@@ -18,6 +18,11 @@ COPY . /var/www/html
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# PERBAIKAN: Buat folder wajib Laravel secara manual sebelum composer install
+RUN mkdir -p /var/www/html/storage /var/www/html/bootstrap/cache
+
+# Install dependensi Laravel
 RUN composer install --no-dev --optimize-autoloader
 
 # Berikan hak akses untuk folder storage & cache
