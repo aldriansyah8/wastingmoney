@@ -18,5 +18,5 @@
 
 <!-- ================= FOOTER ================= -->
 <footer class="{{ $resolvedClass }}">
-  instagram &nbsp;|&nbsp; tiktok &nbsp;|&nbsp; threads &nbsp;|&nbsp; x
+  <a href="https://www.instagram.com/wastingmoney_/";>instagram</a> &nbsp;|&nbsp; <a href="https://www.threads.com/@wastingmoney_">threads</a> &nbsp;
 </footer>
