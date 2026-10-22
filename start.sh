@@ -10,5 +10,8 @@ touch /var/www/html/database/database.sqlite
 php artisan migrate --force
 php artisan db:seed --force
 
+# Berikan hak akses tulis ke folder database untuk web server
+chown -R www-data:www-data /var/www/html/database
+
 # Jalankan Apache server
 apache2-foreground
