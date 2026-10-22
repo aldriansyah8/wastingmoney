@@ -233,7 +233,7 @@ document.addEventListener('DOMContentLoaded', function() {
             signInPassword.focus();
           }
 
-          if (succMsg) succMsg.textContent = 'Registrasi berhasil! Silakan login menggunakan password akun baru Anda.';
+          if (succMsg) succMsg.textContent = res.message || 'Registrasi berhasil! Silakan cek kotak masuk Gmail Anda untuk verifikasi email sebelum login.';
           if (succ) succ.classList.remove('hidden');
         } else {
           if (errMsg) errMsg.textContent = res.message || 'Registrasi gagal. Silakan coba kembali.';
