@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Services\FirebaseService;
+use App\Services\FirebaseWebmailer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
@@ -52,7 +53,15 @@ class AuthController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function register(Request $request)
+
+    /**
+     * Menangani pendaftaran akun pengguna baru (Sign Up) dengan integrasi Webmailer.
+     * 
+     * @param Request $request
+     * @param FirebaseWebmailer $Webmailer
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function register(Request $request, FirebaseWebmailer $webmailer)
     {
         $username = $request->input('username') ?: $request->input('name');
 
@@ -62,33 +71,44 @@ class AuthController extends Controller
         ]);
 
         $name = $username ?: explode('@', $validated['email'])[0];
-        // Aturan Wajib: Pendaftaran publik hanya untuk pengguna biasa (User).
-        // Akun Administrator hanya dapat didaftarkan secara eksklusif oleh Superadmin.
-        $role = 'user';
+        $role = 'user'; // Aturan wajib: pendaftaran publik hanya untuk role 'user'
 
-        // Daftarkan ke Firebase Auth jika dikonfigurasi
+        // Daftarkan akun ke Firebase Auth dan ambil idToken untuk webmailer
         $firebaseUid = null;
+        $idToken = null;
         try {
             $firebaseUid = $this->firebase->createAuthUser(
                 $validated['email'],
                 $validated['password'],
                 $name
             );
+
+            // Lakukan verifikasi login kilat untuk mendapatkan idToken khusus pemanggilan webmailer
+            $fbAuthData = $this->firebase->verifyClientLogin($validated['email'], $request->input('password'));
+            $idToken = $fbAuthData['idToken'] ?? null;
         } catch (\Throwable $e) {}
 
-        // Simpan ke database lokal
+        // Simpan data ke database lokal SQLite
         $user = User::create([
             'name' => $name,
             'email' => strtolower($validated['email']),
-            'password' => Hash::make($validated['password']),
+            'password' => Hash::make($request->input('password')),
             'role' => $role,
             'firebase_uid' => $firebaseUid,
         ]);
+
+        // Panggil modul webmailer terpisah untuk mengirim email verifikasi ke Gmail user
+        if ($idToken) {
+            $webmailer->sendVerificationEmail($idToken);
+        }
 
         // Sinkronisasi data user baru ke Cloud Firestore
         try {
             $this->firebase->syncUser($user->toArray());
         } catch (\Throwable $e) {}
+
+        // PENTING: Sengaja tidak memanggil auth()->login($user) atau token Sanctum 
+        // agar akun berstatus tertunda (pending) sampai user mengklik tautan verifikasi di email.
 
         $userPayload = [
             'id' => $user->id,
@@ -105,7 +125,7 @@ class AuthController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Registrasi akun berhasil! Silakan login menggunakan akun baru Anda.',
+            'message' => 'Registrasi berhasil! Tautan verifikasi telah dikirim ke email Anda. Silakan cek kotak masuk Gmail Anda dan lakukan verifikasi sebelum masuk.',
             'data' => [
                 'user' => $userPayload,
             ],
@@ -123,6 +143,7 @@ class AuthController extends Controller
      * - Mengembalikan user data dan Sanctum bearer token.
      * 
      * @param Request $request
+     * @param FirebaseWebmailer $FirebaseWebmailer
      * @return \Illuminate\Http\JsonResponse
      */
     public function login(Request $request)
@@ -137,25 +158,33 @@ class AuthController extends Controller
             ], 422);
         }
 
-        // Cari berdasarkan Email atau Nama/Username
+        // 1. Cari user terlebih dahulu di database lokal
         $user = User::where('email', strtolower($identifier))
             ->orWhere('name', $identifier)
             ->first();
 
-        // Cek via Firebase Client Auth jika terhubung & user belum ada di DB lokal
-        if (!$user && str_contains($identifier, '@')) {
-            $fbAuthData = $this->firebase->verifyClientLogin($identifier, $password);
-            if ($fbAuthData) {
-                $user = User::create([
-                    'name' => $fbAuthData['displayName'] ?? explode('@', $identifier)[0],
-                    'email' => strtolower($identifier),
-                    'password' => Hash::make($password),
-                    'role' => 'user',
-                    'firebase_uid' => $fbAuthData['localId'] ?? null,
-                ]);
-            }
+        $emailToCheck = $user ? $user->email : $identifier;
+
+        // 2. Verifikasi kredensial ke Firebase Auth
+        $fbAuthData = $this->firebase->verifyClientLogin($emailToCheck, $password);
+
+        if (!$fbAuthData) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Kombinasi Username/Email atau Password salah di Firebase Auth.',
+            ], 401);
         }
 
+        // 3. Pengecekan Mutlak: Validasi status verifikasi email via Firebase Admin SDK
+        $isVerified = $this->firebase->isEmailVerified($emailToCheck);
+        if (!$isVerified) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Akun belum diverifikasi! Silakan periksa kotak masuk Gmail Anda dan klik tautan verifikasi terlebih dahulu sebelum masuk.',
+            ], 403); // Status 403 Forbidden menghentikan akses login secara total
+        }
+
+        // 4. Validasi akhir pencocokan password lokal
         if (!$user || !Hash::check($password, $user->password)) {
             return response()->json([
                 'success' => false,
@@ -163,7 +192,7 @@ class AuthController extends Controller
             ], 401);
         }
 
-        // Simpan sesi login Laravel
+        // Jika lolos seluruh verifikasi, izinkan login
         auth()->login($user);
         session(['wm_user' => $user->toArray(), 'wm_role' => $user->role]);
 
