@@ -154,7 +154,7 @@ class FirebaseService
      */
     public function createAuthUser(string $email, string $password, string $displayName): ?string
     {
-        // 1. Coba daftarkan via Firebase Admin SDK
+        // Coba daftarkan via Firebase Admin SDK
         if ($this->auth) {
             try {
                 $createdUser = $this->auth->createUser([
@@ -170,7 +170,7 @@ class FirebaseService
             }
         }
 
-        // 2. Fallback via Firebase Identity Toolkit Client REST API
+        // Fallback via Firebase Identity Toolkit Client REST API
         if ($this->clientApiKey) {
             try {
                 $url = "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key={$this->clientApiKey}";
@@ -192,6 +192,28 @@ class FirebaseService
         // Fallback ID unik lokal
         return 'fb_' . substr(md5($email . time()), 0, 16);
     }
+
+    /**
+     * Memeriksa apakah email pengguna sudah diverifikasi di Firebase Auth via Admin SDK.
+     * 
+     * @param string $email Email pengguna
+     * @return bool True jika sudah diverifikasi, false jika belum
+     */
+    public function isEmailVerified(string $email): bool
+    {
+        if ($this->auth) {
+            try {
+                $userRecord = $this->auth->getUserByEmail($email);
+                return $userRecord->emailVerified;
+            } catch (\Throwable $e) {
+                Log::warning('Firebase check emailVerified error: ' . $e->getMessage());
+            }
+        }
+        
+        // Ubah ke false (Fail-Secure): Jika status gagal dipastikan, anggap belum diverifikasi
+        return false; 
+    }
+
 
     /**
      * Melakukan verifikasi kredensial login pengguna langsung ke Firebase Auth REST API.
