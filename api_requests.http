@@ -1,0 +1,159 @@
+### ===================================================================
+### WASTING MONEY - LARAVEL REST API TESTING FILE (REST Client)
+### Base URL: http://localhost:8000/api
+### Kredensial default lengkap tersimpan di: accounts.txt
+### ===================================================================
+
+@baseUrl = http://localhost:8000/api
+
+### 1. Health Check
+GET {{baseUrl}}/health
+
+### -------------------------------------------------------------------
+### AUTHENTICATION (Kredensial Cepat & Fleksibel: Username / Email)
+### -------------------------------------------------------------------
+
+### 2. Login Admin (Pakai Username 'admin')
+# @name adminLogin
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin",
+  "password": "admin123"
+}
+
+### Ambil token admin dari response login di atas
+@adminToken = {{adminLogin.response.body.token}}
+
+### 3. Login Pengguna Figma (uccloud26)
+# @name userLogin
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "uccloud26",
+  "password": "user123"
+}
+
+@userToken = {{userLogin.response.body.token}}
+
+### 4. Register Pengguna Baru (Sync ke Firebase Auth)
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "username": "alex_turner",
+  "email": "alex@arcticmonkeys.com",
+  "password": "arctic123#Secure",
+  "role": "user"
+}
+
+### 5. Cek Profil Pengguna (auth:sanctum)
+GET {{baseUrl}}/auth/me
+Authorization: Bearer {{userToken}}
+
+### -------------------------------------------------------------------
+### MERCH REQUEST SUBMISSIONS (User Flow)
+### -------------------------------------------------------------------
+
+### 6. Kirim Request Merch Baru (Format Mockup: Artist/Band, Type, Year, Edition)
+POST {{baseUrl}}/submissions
+Authorization: Bearer {{userToken}}
+Content-Type: application/json
+
+{
+  "artistBand": "Paramore",
+  "merchType": "T-Shirt",
+  "releasedYear": "2023",
+  "merchEdition": "This Is Why Tour Limited Edition",
+  "description": "Paramore Tour T-Shirt in washed charcoal black, size L",
+  "additionalData": {
+    "fileName": "paramore_tour.jpg"
+  }
+}
+
+### 7. Riwayat Pengajuan User Sendiri
+GET {{baseUrl}}/submissions/my
+Authorization: Bearer {{userToken}}
+
+### -------------------------------------------------------------------
+### PUBLIC CATALOG (Card Items & Clean URL Slug)
+### -------------------------------------------------------------------
+
+### 8. List Seluruh Item Approved (Katalog Publik)
+GET {{baseUrl}}/items
+
+### 9. Cari Item Berdasarkan Kata Kunci
+GET {{baseUrl}}/items?q=taylor
+
+### 10. Detail Item via Clean URL Slug
+GET {{baseUrl}}/items/taking-back-sunday-vinyl-1
+
+### -------------------------------------------------------------------
+### ADMIN MANAGEMENT (Approval Flow & Status Update)
+### -------------------------------------------------------------------
+
+### 11. Daftar Seluruh Formulir Masuk (Admin)
+GET {{baseUrl}}/admin/submissions
+Authorization: Bearer {{adminToken}}
+
+### 12. Update Status Pengajuan (In Progress / Approved / Rejected)
+PATCH {{baseUrl}}/admin/submissions/1/status
+Authorization: Bearer {{adminToken}}
+Content-Type: application/json
+
+{
+  "status": "Approved",
+  "adminNotes": "Barang telah ditemukan dari verified seller di Tokyo dan siap diproses."
+}
+
+### 13. Setujui Formulir (Approve -> Terbit Otomatis ke Katalog Publik)
+PATCH {{baseUrl}}/admin/submissions/3/approve
+Authorization: Bearer {{adminToken}}
+Content-Type: application/json
+
+{
+  "admin_notes": "Merchandise Radiohead Hoodie telah diverifikasi asli."
+}
+
+### 14. Tolak Formulir (Reject dengan Catatan Alasan)
+PATCH {{baseUrl}}/admin/submissions/4/reject
+Authorization: Bearer {{adminToken}}
+Content-Type: application/json
+
+{
+  "admin_notes": "Edisi vinyl ini sudah diskontinu permanen dan belum ditemukan seller terpercaya."
+}
+
+### -------------------------------------------------------------------
+### SUPERADMIN MANAGEMENT (Khusus Superadmin: Tambah Admin Baru)
+### -------------------------------------------------------------------
+
+### 15. Login Superadmin (Pakai Username 'superadmin')
+# @name superadminLogin
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "superadmin",
+  "password": "admin123"
+}
+
+@superadminToken = {{superadminLogin.response.body.token}}
+
+### 16. Daftar Seluruh Akun Administrator
+GET {{baseUrl}}/admin/admins
+Authorization: Bearer {{superadminToken}}
+
+### 17. Tambah Akun Administrator Baru (Hanya Bisa Diakses oleh Superadmin)
+POST {{baseUrl}}/admin/admins
+Authorization: Bearer {{superadminToken}}
+Content-Type: application/json
+
+{
+  "email": "admin_baru@wastingmoney.id",
+  "username": "admin_baru",
+  "password": "admin123#Secure",
+  "role": "admin"
+}

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8fafc" />
+      <stop offset="100%" stop-color="#e2e8f0" />
+    </linearGradient>
+    <linearGradient id="iconGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#94a3b8" />
+      <stop offset="100%" stop-color="#64748b" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="400" fill="url(#bgGrad)" rx="24" />
+  <g transform="translate(140, 120)">
+    <!-- T-Shirt / Merch Icon -->
+    <path d="M40 10 L80 10 L95 30 L115 20 L135 60 L115 70 L115 130 L5 130 L5 70 L-15 60 L5 20 L25 30 Z" fill="none" stroke="url(#iconGrad)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Hanger / Collar detail -->
+    <path d="M40 10 C40 25, 80 25, 80 10" fill="none" stroke="url(#iconGrad)" stroke-width="5" stroke-linecap="round" />
+  </g>
+  <text x="200" y="295" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="600" fill="#64748b" text-anchor="middle" letter-spacing="0.5">FOTO TIDAK DILAMPIRKAN</text>
+  <text x="200" y="318" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="500" fill="#94a3b8" text-anchor="middle">Referensi barang tanpa gambar</text>
+</svg>

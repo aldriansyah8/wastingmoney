@@ -1,0 +1,88 @@
+================================================================================
+                    DAFTAR AKUN & KREDENSIAL LOGIN SISTEM
+                             WASTING MONEY
+================================================================================
+
+Berikut adalah daftar akun yang dapat digunakan untuk masuk (login) ke dalam sistem
+Wasting Money, baik sebagai Superadmin, Admin, maupun Pengguna Biasa (User).
+
+Catatan Login:
+- Anda dapat login menggunakan EMAIL ataupun USERNAME pada kolom input.
+- URL Halaman Login : http://127.0.0.1:8000/auth
+- URL Dashboard Admin: http://127.0.0.1:8000/admin
+- URL Request List User: http://127.0.0.1:8000/cart
+
+================================================================================
+1. AKUN SUPERADMIN (AKSES TERTINGGI & MANAGE ACCOUNTS)
+================================================================================
+Role        : Superadmin
+Username    : superadmin
+Email       : superadmin@wastingmoney.id
+Password    : admin123
+Hak Akses   :
+- Mengakses Admin Dashboard (/admin).
+- Mengelola akun (Manage Accounts: melihat daftar user & admin, menambah admin baru).
+- Mengubah status request merch, verifikasi item, input harga & catatan.
+- Mengunggah foto bukti temuan barang admin (hingga 3 foto saat status In Progress).
+- Menghapus request yang diajukan user.
+
+================================================================================
+2. AKUN ADMINISTRATOR (ADMIN DASHBOARD & VERIFIKASI MERCH)
+================================================================================
+Akun Utama:
+Role        : Admin
+Username    : admin
+Email       : admin@rakapteman.id  (atau: admin@wastingmoney.id)
+Password    : admin123
+Hak Akses   :
+- Mengakses Admin Dashboard (/admin).
+- Meninjau pengajuan merch dari pengguna (Review Modal).
+- Mengubah status merch (Queue -> In Progress -> Found -> Bought -> Shipped, dll).
+- Mengunggah foto bukti temuan barang admin (hingga 3 foto saat status In Progress).
+- Menginputkan mata uang, estimasi harga, dan catatan penjual (Seller Notes).
+
+Akun Cadangan Admin:
+Role        : Admin
+Username    : System Administrator
+Email       : sysadmin@wastingmoney.id
+Password    : admin123
+
+================================================================================
+3. AKUN USER / PENGGUNA (CUSTOMER / PEMOHON MERCH)
+================================================================================
+Akun Utama:
+Role        : User
+Username    : user
+Email       : user@rakapteman.id  (atau: user@wastingmoney.id)
+Password    : user123
+Hak Akses   :
+- Menjelajahi katalog merchandise di halaman utama (/).
+- Mengajukan pencarian merch baru (Request Merch /request-merch).
+- Melihat daftar pengajuan & status progress merch (Merch Request List /cart).
+- Melihat foto referensi pengajuan dan foto bukti barang yang ditemukan admin.
+- Mengunduh / cetak invoice (Export Invoice PDF).
+- Checkout & konfirmasi pembayaran merch yang sudah ditemukan.
+
+Akun Alternatif User:
+Role        : User
+Username    : siti
+Email       : siti.rahmayanti@mitra.org
+Password    : user123
+
+Role        : User
+Username    : testuser
+Email       : testuser@example.com
+Password    : password
+
+================================================================================
+4. FITUR BYPASS TEST LOGIN CEPAT (UNTUK DEMO / DEVELOPER)
+================================================================================
+Jika ingin langsung login secara instan tanpa perlu mengetik kredensial di form:
+1. Login Cepat Admin : http://127.0.0.1:8000/test-login-admin
+   -> Otomatis mengarahkan ke dashboard /admin dengan sesi admin aktif.
+
+2. Login Cepat User  : http://127.0.0.1:8000/test-login-user
+   -> Otomatis mengarahkan ke halaman /cart dengan sesi user aktif.
+
+================================================================================
+================================================================================

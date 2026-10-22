@@ -1,0 +1,354 @@
+/* ==========================================================================
+   WASTING MONEY - PROFILE EDIT & CONFIRMATION MODAL STYLES
+   Design System matching exact client mockups (Image 1 & Image 2)
+   Strictly external CSS (Zero inline <style> tags)
+   ========================================================================== */
+
+/* Page Container */
+.profile-page-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  color: #0f172a;
+}
+
+/* Header (Matching Image 1) */
+.profile-header {
+  width: 100%;
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 1.25rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.profile-logo-img {
+  height: 28px;
+  width: auto;
+  object-fit: contain;
+}
+
+.profile-right-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  color: #0f172a;
+  position: relative;
+}
+
+/* Main Form Container (Matching Image 1) */
+.profile-main-content {
+  flex: 1;
+  width: 100%;
+  max-width: 520px;
+  margin: 2rem auto 4rem;
+  padding: 0 1.5rem;
+}
+
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.profile-form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-form-label {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 0.4rem;
+  line-height: 1.2;
+}
+
+/* Standard Inputs */
+.profile-input {
+  width: 100%;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 0.65rem 0.85rem;
+  font-size: 0.8125rem;
+  color: #0f172a;
+  background-color: #ffffff;
+  outline: none;
+  font-weight: 500;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.profile-input:focus {
+  border-color: #4d47c3;
+  box-shadow: 0 0 0 3px rgba(77, 71, 195, 0.12);
+}
+
+.profile-input::placeholder {
+  color: #94a3b8;
+  font-weight: 400;
+}
+
+/* Disabled / Read-Only Input (Username & Default Password Mask) */
+.profile-input-readonly {
+  background-color: #ededed;
+  color: #334155;
+  border-color: #cbd5e1;
+  cursor: not-allowed;
+  font-weight: 600;
+  user-select: none;
+}
+
+/* 2-Column Row for Phone Number & Postal Code (Image 1) */
+.profile-grid-2-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.85rem;
+}
+
+/* Change Password link below Password */
+.profile-change-pwd-link {
+  font-size: 0.725rem;
+  color: #0f172a;
+  font-weight: 600;
+  text-decoration: none;
+  text-align: right;
+  margin-top: 0.35rem;
+  cursor: pointer;
+  align-self: flex-end;
+  transition: color 0.15s ease;
+}
+
+.profile-change-pwd-link:hover {
+  color: #4d47c3;
+  text-decoration: underline;
+}
+
+/* Password Change Dropdown Drawer */
+.profile-password-drawer {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: all 0.25s ease;
+}
+
+/* Action Buttons Row: Save Changes & Cancel (Image 1) */
+.profile-actions-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.85rem;
+  margin-top: 1rem;
+}
+
+.profile-btn-save {
+  background-color: #4d47c3;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.8125rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.15s ease;
+  box-shadow: 0 4px 12px rgba(77, 71, 195, 0.25);
+}
+
+.profile-btn-save:hover {
+  background-color: #3f39a8;
+  transform: translateY(-1px);
+}
+
+.profile-btn-cancel {
+  background-color: #c34747;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.8125rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.15s ease;
+  box-shadow: 0 4px 12px rgba(195, 71, 71, 0.2);
+}
+
+.profile-btn-cancel:hover {
+  background-color: #b03a3a;
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   CONFIRMATION MODAL ("Are you sure want to save changes?") (Matching Image 2)
+   ========================================================================== */
+.profile-confirm-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.profile-confirm-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Modal Card Window (Image 2) */
+.profile-confirm-card {
+  width: 100%;
+  max-width: 580px;
+  background-color: #ffffff;
+  border: 1.5px solid #0f172a;
+  border-radius: 20px;
+  padding: 3rem 2.25rem 2.25rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  transform: scale(0.95);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.profile-confirm-overlay.active .profile-confirm-card {
+  transform: scale(1);
+}
+
+.profile-confirm-title {
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.3;
+  margin-bottom: 2.25rem;
+}
+
+.profile-confirm-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.85rem;
+}
+
+.profile-btn-yes {
+  background-color: #4d47c3;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.875rem;
+  padding: 0.75rem 2.5rem;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 0 4px 12px rgba(77, 71, 195, 0.25);
+}
+
+.profile-btn-yes:hover {
+  background-color: #3f39a8;
+  transform: translateY(-1px);
+}
+
+.profile-btn-modal-cancel {
+  background-color: #c34747;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.875rem;
+  padding: 0.75rem 2.2rem;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 0 4px 12px rgba(195, 71, 71, 0.2);
+}
+
+.profile-btn-modal-cancel:hover {
+  background-color: #b03a3a;
+  transform: translateY(-1px);
+}
+
+/* Footer (Matching all other pages) */
+.profile-footer {
+  width: 100%;
+  background-color: #27272a;
+  color: #e4e4e7;
+  text-align: center;
+  padding: 1.15rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  margin-top: auto;
+}
+
+/* ==========================================================================
+   BACK HOME BUTTON & PASSWORD TOGGLE (For User & Edit Profile)
+   ========================================================================== */
+.profile-nav-top {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 1.25rem;
+}
+
+.profile-btn-back-home {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #f8fafc;
+  color: #334155;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  padding: 0.6rem 1.15rem;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1.5px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.profile-btn-back-home:hover {
+  background-color: #4e46e5;
+  color: #ffffff;
+  border-color: #4e46e5;
+  transform: translateX(-3px);
+  box-shadow: 0 4px 14px rgba(78, 70, 229, 0.25);
+}
+
+.profile-btn-back-home:active {
+  transform: translateX(0);
+}
+
+/* Password Toggle in Profile Drawer */
+.profile-password-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.profile-pwd-toggle-btn {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s ease;
+}
+
+.profile-pwd-toggle-btn:hover {
+  color: #4d47c3;
+}
